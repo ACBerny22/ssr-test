@@ -7,8 +7,6 @@ interface ComponentProps {
   
 }
 
-
-
 const Component: FC<ComponentProps> = ({}) => {
 
     const addPost = async (formData:FormData) => {
@@ -23,7 +21,7 @@ const Component: FC<ComponentProps> = ({}) => {
         
         const record = await pb.collection('posts').create(data);
 
-        redirect("/")
+        redirect("/posts?page=1")
     }
 
     return (
