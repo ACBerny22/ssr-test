@@ -2,12 +2,17 @@ import { FC } from 'react'
 import { redirect } from 'next/navigation'
 import { pb } from '@/pocketbase'
 import { revalidatePath } from 'next/cache'
+import { cookies } from 'next/headers'
+import { getUser } from '@/pocketbase'
 
 interface ComponentProps {
   
 }
 
-const Component: FC<ComponentProps> = ({}) => {
+const Component: FC<ComponentProps> = async ({}) => {
+
+    const user:any = await getUser(cookies())
+
 
     const addPost = async (formData:FormData) => {
         'use server'
@@ -16,7 +21,7 @@ const Component: FC<ComponentProps> = ({}) => {
             "content": formData.get("content"),
             "title": formData.get("title"),
             "date": "2022-01-01 10:00:00.123Z",
-            "user": ""
+            "user": user.id as string
         };
         
         const record = await pb.collection('posts').create(data);

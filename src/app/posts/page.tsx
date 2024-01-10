@@ -7,6 +7,7 @@ import { CiLogin } from "react-icons/ci";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { cookies } from "next/headers";
 import { getUser } from "@/pocketbase";
+import { redirect } from "next/navigation";
 
 export default async function PostsPage({params, searchParams}: any) {
   
@@ -22,6 +23,10 @@ export default async function PostsPage({params, searchParams}: any) {
         "use server"
         pb.authStore.clear();
         cookies().delete('pb_auth')
+
+        revalidatePath("/posts")
+        redirect("/")
+
     }
 
     revalidatePath("/posts")

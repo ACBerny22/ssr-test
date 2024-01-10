@@ -17,5 +17,16 @@ export async function getUser(cookieStore: ReadonlyRequestCookies) {
     return pb.authStore.model;
 }
 
+export async function isAuthenticated(cookieStore: ReadonlyRequestCookies) {
+    const cookie = cookieStore.get('pb_auth');
+    if (!cookie) {
+        return false;
+    }
+
+    // loadFromCookie applies the cookie data before checking the user is authenticated
+    pb.authStore.loadFromCookie(cookie?.value || '');
+    return pb.authStore.isValid || false
+}
+
 
 
