@@ -17,7 +17,12 @@ export default async function PostsPage({params, searchParams}: any) {
     });
 
     const user:any = await getUser(cookies())
-    console.log(user)
+
+    const logout = async () => {
+        "use server"
+        pb.authStore.clear();
+        cookies().delete('pb_auth')
+    }
 
     revalidatePath("/posts")
 
@@ -34,15 +39,18 @@ export default async function PostsPage({params, searchParams}: any) {
                 New Post
                 </Link>
                 {!cookies().get('pb_auth') ?
-                <Link href={"/auth/login"} className="flex gap-3 p-3  border border-white rounded-lg
-                 bg-transparent text-white
-                hover:bg-zinc-600 hover:border-zinc-900 transition-all ease-out">
-                    <div className="text-2xl">
-                        <CiLogin />
-                    </div>
-                    Log In
-                </Link>
-                : <p>{user?.username}</p>
+                    <Link href={"/auth/login"} className="flex gap-3 p-3  border border-white rounded-lg
+                    bg-transparent text-white hover:bg-zinc-600 hover:border-zinc-900 transition-all ease-out">
+                        <div className="text-2xl">
+                            <CiLogin />
+                        </div>
+                        Log In
+                    </Link>
+                :   <form action={logout}>
+                        <input name="itemId" className="hidden"/>
+                        <button className="flex gap-3 p-3  border border-white rounded-lg
+                    bg-transparent text-white hover:bg-zinc-600 hover:border-zinc-900 transition-all ease-out" type="submit">Log Out</button>
+                    </form>
                 }
             </div>
         </div>

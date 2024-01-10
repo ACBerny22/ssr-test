@@ -19,7 +19,7 @@ export default async function Home() {
 
   return (
     <main className="flex flex-col items-center justify-center h-screen gap-10">
-      <h1 className="text-4xl font-black">Welcome to Harmony Posts, {user.name}</h1>
+      <h1 className="text-4xl font-black">Welcome to Harmony Posts, {user?.name}</h1>
       <Link className="p-4 bg-white text-black rounded-lg"
       href={{pathname: "/posts", query:{page:1}}}>Go to Posts</Link>
  
