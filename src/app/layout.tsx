@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import toast, { Toaster } from 'react-hot-toast';
+import NavBar from '@/components/NavBar';
+import clsx from 'clsx';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,7 +19,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={clsx(inter.className, 'bg-black text-white')}>
+        <Toaster position="bottom-center" />
+        <NavBar></NavBar>
+        {children}
+      </body>
     </html>
   )
 }
