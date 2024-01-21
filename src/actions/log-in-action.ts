@@ -11,6 +11,9 @@ export const logIn = async (formData:FormData) => {
             formData.get("username") as string,
             formData.get("password") as string,
         )
+        
+        console.log(pb.authStore.model)
+
     }catch(error){
         return{
             error:"Bad Credentials"
@@ -22,7 +25,7 @@ export const logIn = async (formData:FormData) => {
     const cookie_object = cookies().get('pb_auth');
     const cookie_string = cookie_object?.name + '=' + cookie_object?.value;
 
-    pb.authStore.loadFromCookie(cookie_string)
+    //pb.authStore.loadFromCookie(cookie_string)
 
     redirect("/")
 }

@@ -8,10 +8,15 @@ import { pb } from "@/pocketbase"
 
 export const goToSearched = async (formData:FormData) => {
     'use server'
-    const newPb:any = await getUpdatedPb(cookies())
+    await getUpdatedPb(cookies())
 
     try{
-        const records = await pb.collection('posts').getFirstListItem(`title~"${formData.get("searchTerm")}"`)
+        const records = await pb.collection("posts").getList(1, 20, {
+        filter: pb.filter(
+            "id ~ {:search} || content ~ {:search} || title ~ {:search} || date ~ {:search} || user ~ {:search}",
+            { search: formData.get('searchTerm') }
+            )
+        })
     }catch(error){
         return{
             error:"Not found"

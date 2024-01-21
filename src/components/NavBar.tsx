@@ -1,60 +1,41 @@
-import { pb } from "@/pocketbase";
 import Link from "next/link";
-import { revalidatePath } from "next/cache";
-import PostCard from "@/components/PostCard";
-import { FaFeatherAlt } from "react-icons/fa";
 import { CiLogin, CiLogout } from "react-icons/ci";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import logout from "@/actions/log-out-action";
+import { usePathname } from "next/navigation";
+import { useCookies } from "react-cookie";
+import { getUpdatedPb, getUser, pb, store } from "@/pocketbase";
 import { cookies } from "next/headers";
-import { getUser } from "@/pocketbase";
-import { redirect } from "next/navigation";
-
+import BurgerButton from "./BurgerButton";
 
 export default async function NavBar(){
 
-    const user:any = await getUser(cookies())
-    
-    const logout = async () => {
-        "use server"
-        pb.authStore.clear();
-        cookies().delete('pb_auth')
-
-        revalidatePath("/posts")
-        redirect("/")
-    }
+    const user = await getUser(cookies())
 
     return(
-        <div>
-
+        <div className="fixed w-screen top-0 z-40">
             {user &&
-            <div className="flex py-7 px-10 justify-between bg-gradient-to-r from-cyan-500 to-blue-500  ">
+            <div className="flex w-full py-4 px-10 justify-between bg-gradient-to-r from-teal-400 to-violet-500  font-medium">
                 <Link href={"/"} className="text-4xl font-black">Harmony Posts</Link>
-                <div className="flex gap-3">
-                    <Link href={"/posts/create"} className="flex gap-3 p-3 backdrop-blur-xl bg-white/30 rounded-lg
-                    text-white hover:bg-transparent hover:text-white transition-all ease-out">
-                    <div className="mt-1 text-lg">
-                        <FaFeatherAlt></FaFeatherAlt>
+                
+                <div className="lg:flex lg:items-center lg:gap-3 hidden">
+                    
+                    <div className="text-lg">
+                        {user.username}
                     </div>
-                    New Post
-                    </Link>
-                    {!cookies().get('pb_auth') ?
-                        <Link href={"/auth/login"} className="flex gap-3 p-3  border border-white rounded-lg
-                        bg-transparent text-white hover:bg-zinc-600 hover:border-zinc-900 transition-all ease-out">
-                            <div className="text-2xl">
-                                <CiLogin />
-                            </div>
-                            Log In
-                        </Link>
-                    :   <form action={logout}>
-                            <input name="itemId" className="hidden"/>
-                            <button className="flex gap-3 p-3  border border-white rounded-lg
-                            bg-transparent text-white hover:bg-zinc-600 hover:border-zinc-900 transition-all ease-out" type="submit">
+                    
+                    <div className='relative w-12 h-12 overflow-hidden rounded-full'>
+                            <img className='object-cover w-full h-full rounded-full' src={`${process.env.NEXT_PUBLIC_DB_POCKET}/api/files/_pb_users_auth_/${user.id}/${user.avatar}`} 
+                            />
+                    </div>
+                    <form action={logout}>
+                        <input name="itemId" className="hidden"/>           
+                        <button className="flex gap-3 p-3 rounded-lg bg-white/50 text-white
+                            hover:bg-white/35 hover:border-zinc-900 transition-all ease-out" type="submit">
                                 <div className="text-2xl"><CiLogout></CiLogout></div>
-                                Log Out
-                            </button>
-                        </form>
-                    }
+                        </button>
+                    </form>
                 </div>
+                <BurgerButton user={user}></BurgerButton>
             </div>
             }
         </div>

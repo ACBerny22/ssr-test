@@ -27,6 +27,7 @@ export async function getUser(cookieStore: ReadonlyRequestCookies) {
     }
 
     pb.authStore.loadFromCookie(cookie?.value || '');
+    console.log(pb.authStore.model)
     return pb.authStore.model;
 }
 
