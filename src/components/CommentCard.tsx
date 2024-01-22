@@ -14,7 +14,7 @@ export default async function CommentCard({...props} : CommentCardProps){
     return (
         <>
             <div className='flex items-center gap-4'>
-                <div className='relative w-8 h-8 overflow-hidden rounded-full'>
+                <div className='relative w-12 h-12 overflow-hidden rounded-full'>
                     <img className='object-cover w-full h-full rounded-full' src={`${process.env.NEXT_PUBLIC_DB_POCKET}/api/files/_pb_users_auth_/${props.user.id}/${props.user.avatar}`} 
                     />
                 </div>

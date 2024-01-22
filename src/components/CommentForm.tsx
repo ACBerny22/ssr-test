@@ -24,7 +24,7 @@ export default function CommentForm({post_to, user}:CommentFormProps){
     <>
         <form ref={ref} action={callToCreateComment} className='flex flex-col gap-3'>
             <div className='flex gap-5'>
-                <div className='relative w-12 h-12 overflow-hidden rounded-full'>
+                <div className='relative w-14 h-14 overflow-hidden rounded-full'>
                     <img className='object-cover w-full h-full rounded-full' src={`${process.env.NEXT_PUBLIC_DB_POCKET}/api/files/_pb_users_auth_/${user.id}/${user.avatar}`} 
                     />
                 </div>

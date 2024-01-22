@@ -8,6 +8,7 @@ import CommentForm from '@/components/CommentForm'
 import { getUser } from '@/pocketbase'
 import { cookies } from 'next/headers'
 import fetchCurrentUser from "@/actions/fetch-user-action";
+import { revalidatePath, revalidateTag } from 'next/cache'
 
 
 interface pageProps {
@@ -28,6 +29,8 @@ export default async function Page({params} : pageProps){
     }
 
     console.log(currentUser)
+
+    revalidatePath(`/posts/[id]`)
 
     return (
     <>

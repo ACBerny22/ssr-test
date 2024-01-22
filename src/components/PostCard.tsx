@@ -34,7 +34,7 @@ const PostCard: FC<ComponentProps> = (items : ComponentProps, {children,}:{child
         <Link href={`/posts/${items.id}`}  className='mb-5'>
             <div className='mb-5 flex gap-3 justify-between'>
                 <div className='flex gap-3'>           
-                    <div className='relative w-7 h-7 overflow-hidden rounded-full'>
+                    <div className='relative w-10 h-10 overflow-hidden rounded-full'>
                         <img className='object-cover w-full h-full rounded-full' src={`${process.env.NEXT_PUBLIC_DB_POCKET}/api/files/_pb_users_auth_/${items.user?.id}/${items.user?.avatar}`} 
                         alt={`${items.user?.username}`} />
                     </div>
