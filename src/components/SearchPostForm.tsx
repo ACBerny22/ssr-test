@@ -33,10 +33,10 @@ export default function SearchPostForm(){
     
     return(
         <form action={goToSearchedClient} 
-            className="flex justify-between gap-5 w-full">
+            className="flex justify-between gap-3 w-full">
                 <input className="w-full bg-gray-700 p-3 rounded-lg" placeholder="Search" 
                 ref={ref} onChange={handleInputChange} name="searchTerm" required></input>
-                <button className="py-3 px-10 bg-white text-black rounded-lg text-lg disabled:bg-zinc-500 transition ease-out"
+                <button className="py-3 px-3 lg:px-10 bg-white text-black rounded-lg text-lg disabled:bg-zinc-500 transition ease-out"
                 disabled={!isActive}><FaSearch/></button>
         </form>
     )

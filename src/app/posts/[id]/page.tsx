@@ -7,6 +7,8 @@ import createComment from '@/actions/add-comment-action'
 import CommentForm from '@/components/CommentForm'
 import { getUser } from '@/pocketbase'
 import { cookies } from 'next/headers'
+import fetchCurrentUser from "@/actions/fetch-user-action";
+
 
 interface pageProps {
     params:{
@@ -19,8 +21,13 @@ export default async function Page({params} : pageProps){
     const record = await fetchPost(params.id)
     const comments = await fetchComments(params.id)
     const user:any = await getUser(cookies())
-    //const createCommentWithId = createComment.bind(null, params.id)
-    console.log(user?.avatar)
+
+    let currentUser
+    if(user){
+        currentUser = await fetchCurrentUser(user?.id as string)
+    }
+
+    console.log(currentUser)
 
     return (
     <>
@@ -34,7 +41,7 @@ export default async function Page({params} : pageProps){
                 <p className='text-lg'>({comments.totalItems}):</p>
             </div>
             <div>
-                <CommentForm post_to={params.id} user={user}></CommentForm>
+                <CommentForm post_to={params.id} user={currentUser}></CommentForm>
             </div>
             {comments.items.map((comment) => (
                 <CommentCard content={comment.content} user={comment.expand?.user} post_user={record.expand?.user}/>
