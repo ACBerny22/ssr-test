@@ -16,9 +16,10 @@ interface ComponentProps {
     date:string
     likes:number
     user?:User
+    comments?:any
 }
 
-const PostCard: FC<ComponentProps> = (items : ComponentProps, {children,}:{children: React.ReactNode}) => {
+const PostCard: FC<ComponentProps> = (items : ComponentProps) => {
 
     const [isDotsOpen, setIsDotsOpen] = useState<boolean>(false)
     const [data, setData] = useState()
@@ -59,7 +60,12 @@ const PostCard: FC<ComponentProps> = (items : ComponentProps, {children,}:{child
                         </button>
                         <p className='text-lg'>{items.likes}</p>
                     </div>
-                    {children}
+                    <div className='flex gap-3 bg-gray-600  px-2 rounded-full group-hover:bg-gray-200'>
+                        <button className='text-lg mt-1 hover:text-red-600'>
+                            <TfiComments></TfiComments>
+                        </button>
+                        <p className='text-lg'>{items.comments?.length}</p>
+                    </div>
                 </div>
             </div>
             <p className="text-sm text-zinc-400 mt-3">{items.date.slice(0,10)}</p>

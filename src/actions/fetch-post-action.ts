@@ -11,11 +11,15 @@ export async function fetchPosts(page:number){
     
     const records = await pb.collection('posts').getList(page, 6, {
         sort: '-created',
-        expand:'user'
+        expand:'user, comments(post_to)'
     });
 
     revalidatePath("/posts")
-    console.log(records.items)
+    if(records.items[0].expand){
+        console.log(records.items[0].expand['comments(post_to)'].length)
+    }
+
+    
     return records
 
 }
@@ -24,7 +28,7 @@ export async function fetchPost(id:string){
     await getUpdatedPb(cookies())
 
     const record = await pb.collection('posts').getFirstListItem(`id="${id}"`, {
-        expand:'user'
+        expand:'user '
     });
     return record
 

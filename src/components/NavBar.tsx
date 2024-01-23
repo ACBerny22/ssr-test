@@ -1,13 +1,10 @@
 import Link from "next/link";
 import { CiLogin, CiLogout } from "react-icons/ci";
 import logout from "@/actions/log-out-action";
-import { usePathname } from "next/navigation";
-import { useCookies } from "react-cookie";
 import { getUpdatedPb, getUser, pb, store } from "@/pocketbase";
 import { cookies } from "next/headers";
 import BurgerButton from "./BurgerButton";
 import fetchCurrentUser from "@/actions/fetch-user-action";
-import { User } from "@/interfaces/user";
 
 export default async function NavBar(){
 

@@ -14,6 +14,8 @@ export default async function PostsPage({params, searchParams}: any) {
     const currentPage = parseInt(searchParams.page)
     const records = await fetchPosts(currentPage)
     
+    console.log(records.items)
+
     //const user:any = await getUser(cookies())
 
     return (
@@ -25,7 +27,7 @@ export default async function PostsPage({params, searchParams}: any) {
         <section className="grid lg:grid-cols-2 gap-5">
             {records.items.map((item) => (
             <PostCard key={item.id} id={item.id} title={item.title} 
-            content={item.content} date={item.date} likes={item.likes} user={item.expand?.user}/>))}
+            content={item.content} date={item.date} likes={item.likes} user={item.expand?.user} comments={item.expand?.['comments(post_to)']}/>))}
         </section>
         <div className="flex justify-center gap-5">
             <Link className="flex text-black bg-white py-2 px-3 rounded-lg gap-1"
