@@ -20,7 +20,7 @@ interface pageProps {
 export default async function Page({params} : pageProps){
 
     const record = await fetchPost(params.id)
-    const comments = await fetchComments(params.id)
+    const comments = await fetchComments(params.id, 1)
     const user:any = await getUser(cookies())
 
     let currentUser
@@ -28,15 +28,14 @@ export default async function Page({params} : pageProps){
         currentUser = await fetchCurrentUser(user?.id as string)
     }
 
-    console.log(currentUser)
 
-    revalidatePath(`/posts/[id]`)
+    revalidatePath(`/posts/[id]`, 'page')
 
     return (
     <>
     <main className='flex flex-col gap-10 py-10 px-5 sm:px-40 xl:px-60'>
         <div>
-            <PostCard id={record.id} title={record.title} content={record.content} date={record.date} likes={record.likes} user={record.expand?.user} />
+            <PostCard id={record.id} title={record.title} content={record.content} date={record.date} likes={record.likes} user={record.expand?.user} currentUser={currentUser} />
         </div>
         <section>
             <div className='flex justify-between mb-10 text-2xl font-bold'>

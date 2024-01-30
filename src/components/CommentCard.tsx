@@ -20,7 +20,7 @@ export default async function CommentCard({...props} : CommentCardProps){
                 </div>
                 <div className='flex justify-between flex-col py-5 gap-1'>
                     <p className='font-bold'>{props.user.username} {(props.user.username === props.post_user.username) &&
-                     <span className='text-xs px-3 py-1 bg-white rounded-full text-gray-800'>Creator</span>}
+                     <span className='text-xs px-3 py-1 bg-white rounded-full text-gray-800'>Author</span>}
                      </p>
                     <p className='font-light'>{props.content}</p>
                 </div>

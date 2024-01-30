@@ -1,15 +1,7 @@
-import { FC } from 'react'
+import { FC } from "react";
 
+interface PostSpinLoadProps {}
 
-interface PostSpinLoadProps {
-  
-}
-
-
-export default function PostSpinLoad({}){
-    return (
-        <div>
-            Navigation
-        </div>
-    )
+export default function PostSpinLoad({}) {
+    return <div>Navigation</div>;
 }

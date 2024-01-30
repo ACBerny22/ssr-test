@@ -8,6 +8,6 @@ export default async function fetchCurrentUser(id:string) {
     
     await getUpdatedPb(cookies())
     console.log(id)
-    const record = await pb.collection('users').getFirstListItem(`id="${id}"`);
+    const record = await pb.collection('users').getFirstListItem(`id="${id}"`, {cache: 'no-store'});
     return record
 }

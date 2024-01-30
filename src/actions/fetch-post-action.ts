@@ -11,12 +11,15 @@ export async function fetchPosts(page:number){
     
     const records = await pb.collection('posts').getList(page, 6, {
         sort: '-created',
-        expand:'user, comments(post_to)'
+        expand:'user, comments(post_to), likedBy(post_to)'
     });
 
+    console.log(records)
+
     revalidatePath("/posts")
+
     if(records.items[0].expand){
-        console.log(records.items[0].expand['comments(post_to)'].length)
+        console.log(records.items[0].expand['likedBy(post_to)'])
     }
 
     

@@ -10,6 +10,7 @@ export const logIn = async (formData:FormData) => {
         const authData = await pb.collection('users').authWithPassword(
             formData.get("username") as string,
             formData.get("password") as string,
+            {cache:'no-store'}
         )
         
         console.log(pb.authStore.model)
