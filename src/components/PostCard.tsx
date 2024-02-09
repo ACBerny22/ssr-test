@@ -39,7 +39,7 @@ const PostCard: FC<ComponentProps> = (items: ComponentProps) => {
                                 ? `/user/${items.user?.id}`
                                 : `/user/profile`
                         }
-                        className="flex gap-3"
+                        className="flex gap-3 justify-center items-center"
                     >
                         <div className="relative w-10 h-10 overflow-hidden rounded-full">
                             <img

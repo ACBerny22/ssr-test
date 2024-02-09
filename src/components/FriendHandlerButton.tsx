@@ -25,7 +25,7 @@ export default function FriendHandlerButton({
             )}
             {props.status === "requested" && (
                 <button
-                    className="flex w-full items-center justify-center gap-2 bg-gray-900 p-3 text-lg text-gray-500 
+                    className="flex w-full items-center justify-center gap-2 bg-gray-800 p-3 text-lg text-gray-200 
                         rounded-lg mt-10 hover:brightness-75 transition-all ease-out"
                 >
                     <div className="text-2xl">
