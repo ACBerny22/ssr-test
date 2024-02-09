@@ -43,8 +43,8 @@ export default function page() {
                                 {editName ? (
                                     <input
                                         className=" border  text-sm lg:text-lg rounded-lg font-light
-                                focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 
-                                text-white focus:ring-blue-500 focus:border-blue-500"
+                                focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 border-gray-600
+                                 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                                     ></input>
                                 ) : (
                                     <h1 className="text-5xl ">{user?.name}</h1>

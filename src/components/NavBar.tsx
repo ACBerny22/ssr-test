@@ -7,6 +7,7 @@ import BurgerButton from "./BurgerButton";
 import fetchCurrentUser from "@/actions/fetch-user-action";
 import { FaBell } from "react-icons/fa";
 import { IoLogOutSharp } from "react-icons/io5";
+import { MdPersonSearch } from "react-icons/md";
 
 export default async function NavBar() {
     const user = await getUser(cookies());
@@ -26,6 +27,9 @@ export default async function NavBar() {
                     </Link>
                     <div className="lg:flex lg:justify-center lg:items-center lg:gap-3 hidden">
                         <div className="text-lg flex items-center gap-10">
+                            <div className="text-2xl">
+                                <MdPersonSearch></MdPersonSearch>
+                            </div>
                             <div className="text-2xl">
                                 <FaBell></FaBell>
                             </div>

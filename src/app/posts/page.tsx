@@ -10,7 +10,6 @@ import { cookies } from "next/headers";
 export default async function PostsPage({ params, searchParams }: any) {
     const currentPage = parseInt(searchParams.page);
     const records = await fetchPosts(currentPage);
-
     const currentUser = await getUser(cookies());
 
     if (currentUser) {
@@ -63,7 +62,7 @@ export default async function PostsPage({ params, searchParams }: any) {
                         query: { page: currentPage + 1 },
                     }}
                 >
-                    Next{" "}
+                    Next
                     <span className="mt-1">
                         <FaArrowRight />
                     </span>
